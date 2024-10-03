@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import "../Login/Login.css";  // Je réutilise le CSS de login pour la présentation
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../Redux/userSlice";
+import { register, login } from "../../Redux/userSlice";  // Importe aussi login
 
 const Register = () => {
   let [password, setPassword] = useState("");
@@ -18,10 +18,25 @@ const Register = () => {
       "email": email,
       "password": password,
       "nickname": email.split('@')[0], // Utilise la partie avant @ de l'email comme pseudo
-
     };
+
+    // Enregistre l'utilisateur
     await dispatch(register(body));
+
+    // Si l'inscription est un succès, connecte automatiquement
+    if (status === 'success') {
+      await dispatch(login({ email, password })); // Connecte l'utilisateur après inscription
+    }
   }
+
+  // Redirige vers la page d'accueil après l'inscription réussie
+  useEffect(() => {
+    if (status === 'success') {
+      navigate('/');
+    } else if (status === 'failed') {
+      console.log(error);
+    }
+  }, [status]);
 
   // Redirige vers la page de connexion
   const goToLogin = () => {
