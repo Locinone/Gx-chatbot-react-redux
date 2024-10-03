@@ -7,21 +7,25 @@ import Home from "../Home/Home";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import {ThemeProvider} from "../../Context/ThemeContext/ThemeProvider";
+import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes";
 
 function App() {
 
 
-  return (
+	return (
     <ThemeProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/register" element={<Register/>}/>
-          <Route path="/login" element={<Login/>}/>
-        </Routes>
-      </BrowserRouter>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<ProtectedRoutes/>}>>
+              <Route path="/" element={<Home />} />
+            </Route>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </BrowserRouter>
     </ThemeProvider>
-  );
+	);
+
 }
 
 export default App;
