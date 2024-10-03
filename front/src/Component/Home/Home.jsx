@@ -6,15 +6,6 @@ import {useNavigate} from "react-router-dom";
 function Home() {
 
   const dispatch = useDispatch();
-  let navigate = useNavigate()
-  const {connected} = useSelector(state => state.user);
-
-
-  useEffect(() => {
-    if (connected === false) {
-      navigate('/login');
-    }
-  }, [connected]);
 
   return (
     <>
