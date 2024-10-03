@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect, useContext} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isConnected, disconnected, login } from "../../Redux/userSlice";
 import ChatHistory from "../Chatbot/ChatHistory/ChatHistory";
@@ -6,6 +6,7 @@ import ChatInput from "../Chatbot/ChatInput/ChatInput";
 import { useNavigate } from "react-router-dom";
 import {ThemeContext} from "../../Context/ThemeContext/ThemeProvider";
 import io from "socket.io-client";
+import "./Home.css"
 
 const socket = io('http://localhost:4000');
 
@@ -53,10 +54,12 @@ function Chatbot() {
   return (
     <>
       <div style={{ padding: "20px" }}>
-        <h1>Chatbot</h1>
+        <h1>Chatbot
+          <button onClick={() => changeTheme()} style={{marginLeft: "20px", padding: "10px"}}>Change mode</button>
+        </h1>
 
         {/* Pass messages as props to ChatHistory */}
-        <ChatHistory messages={messages} />
+        <ChatHistory messages={messages}/>
 
         {/* Pass input and handlers as props to ChatInput */}
         <ChatInput
@@ -67,7 +70,6 @@ function Chatbot() {
         <button onClick={() => dispatch(disconnected())} style={{ marginLeft: "20px", padding: "10px" }}>
           Déconnexion
         </button>
-        <button onClick={()=>changeTheme()} >Change mode</button>
       </div>
     </>
   );
