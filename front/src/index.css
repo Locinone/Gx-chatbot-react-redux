@@ -48,8 +48,8 @@ code {
 :root {
 	--main-color: rgb(151, 250, 81);
 	--main-color-hover: rgb(27, 220, 94);
-	--font-color: black;
-	--background-color: whitesmoke;
+    --bg-color: #ffffff;
+    --text-color: #000000;
 
 	--padding-small: 10px;
 	--padding-medium: 20px;
@@ -58,4 +58,16 @@ code {
 	--font-size-small: 10px;
 	--font-size-medium: 20px;
 	--font-size-large: 30px;
+
+}
+
+
+[dark-mode=true] {
+    --bg-color: #1c1c1e;
+    --text-color: #fefefe;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
