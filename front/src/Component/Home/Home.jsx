@@ -4,12 +4,15 @@ import { isConnected, disconnected, login } from "../../Redux/userSlice";
 import ChatHistory from "../Chatbot/ChatHistory/ChatHistory";
 import ChatInput from "../Chatbot/ChatInput/ChatInput";
 import { useNavigate } from "react-router-dom";
+import {ThemeContext} from "../../Context/ThemeContext/ThemeProvider";
 import io from "socket.io-client";
 
 const socket = io('http://localhost:4000');
 
 function Chatbot() {
   const dispatch = useDispatch();
+  
+  const {changeTheme} = useContext(ThemeContext);
 
   const [messages, setMessages] = useState([
     { role: "bot", content: "Hello! How can I help you today?" }
@@ -64,9 +67,11 @@ function Chatbot() {
         <button onClick={() => dispatch(disconnected())} style={{ marginLeft: "20px", padding: "10px" }}>
           Déconnexion
         </button>
+        <button onClick={()=>changeTheme()} >Change mode</button>
       </div>
     </>
   );
 }
 
 export default Chatbot;
+
