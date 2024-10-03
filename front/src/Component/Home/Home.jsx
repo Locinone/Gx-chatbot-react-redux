@@ -10,20 +10,11 @@ const socket = io('http://localhost:4000');
 
 function Chatbot() {
   const dispatch = useDispatch();
-  let navigate = useNavigate();
-  const { connected } = useSelector(state => state.user);
 
   const [messages, setMessages] = useState([
     { role: "bot", content: "Hello! How can I help you today?" }
   ]);
   const [input, setInput] = useState("");
-
-  // Redirect to login if not connected
-  useEffect(() => {
-    if (connected === false) {
-      navigate('/login');
-    }
-  }, [connected]);
 
 
   useEffect(() => {
